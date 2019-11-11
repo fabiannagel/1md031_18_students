@@ -1,9 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>DELI-VERY</title>
+        <title>Welcome to Hypothetical Burgers!</title>
+        <meta charset="utf-8"/>
+
+        <link rel="stylesheet" type="text/css" href="./css/style.css">
     </head>
+    
     <body>
-        <h1>Hello World!!!</h1>
+        <header>
+            <h1>Welcome to BurgerHeaven Online</h1>
+            <img id="header-image" src="https://www.umamiburger.com/wp-content/uploads/2015/02/umami-burger-location-broadway-new-2.jpg" />
+        </header>
+
+        <main>
+            <section id="burger-selection" class="foo">
+                <h2>Select burger</h2>
+                <p>This is where you execute burger selection</p>
+                
+                <table id="burger-selection-table">
+                    <thead>
+                        <tr>
+                            <th>The Fire Burger</th>
+                            <th>Fried Turkey Burger</th>
+                            <th>A Double w/ Cheese</th>
+                        </tr>
+                    </thead>
+    
+                    <tbody>
+                        <tr align="center">
+                            <td><img title="Fire Burger" src="https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4409422.jpg" height="200" width="300"></td>
+                            <td><img title="Fried Turkey Burger" src="https://www.hot-dinners.com/images/stories/blog/2016/macwildxmas.jpg" width="300"></td>
+                            <td><img title="Double w/ Cheese" src="https://www.foodrepublic.com/wp-content/uploads/2012/03/033_FR11785.jpg" width="300"></td>
+                            </td>
+                        </tr>
+    
+                        <tr>
+                            <td>
+                                <ul>
+                                    <li>Kobe beef of the highest quality</li>
+                                    <li>Covered in fancy cheese <span id="highlighted">(contains lactose)</span></li>
+                                    <li>Cold-leavened sourdough bread <span id="highlighted">(contains gluten)</span></li>
+                                </ul>
+                            </td>
+    
+                            <td>
+                                <ul>
+                                    <li>Deep fried Turkish turkey</li>
+                                    <li>A slice of pink stuff <span id="highlighted">(contains lactose)</span></li>
+                                    <li>Shake-n-bake <span id="highlighted">gluten-free bread</span></li>
+                                </ul>
+                            </td>
+    
+                            <td>
+                                <ul>
+                                    <li>Two layers of <span id="highlighted">pure meat</span></li>
+                                    <li>Lots of yummy cheese <span id="highlighted">(contains lactose)</span></li>
+                                    <li>Sweet bread bun <span id="highlighted">(contains gluten)</span></li>
+                                </ul>
+                            </td>
+                        </tr>
+    
+                    </tbody>
+    
+                </table>
+            </section>
+
+            <section id="customer-information">
+                <h2>Customer information</h2>
+                <p>This is where you proide necessarcy information</p>
+
+                <section id="delivery-information">
+                    <h3>Delivery information</h3>
+                    <form>
+                        <p>
+                            <label for="full-name">Full name</label><br>
+                            <input type="text" id="full-name" name="full-name-input" required="required" placeholder="First and last name">
+                        </p>
+
+                        <p>
+                            <label for="email">E-mail</label><br>
+                            <input type="email" id="email" name="email-input" required="required" placeholder="E-mail address">
+                        </p>
+
+                        <p>
+                            <label for="street">Street</label><br>
+                            <input type="text" id="street" name="street-input" required="required" placeholder="Street name">
+                        </p>
+
+                        <p>
+                            <label for="house">House</label><br>
+                            <input type="text" id="house" name="house-input" required="required" placeholder="House number">
+                        </p>
+
+                        <p>
+                            <label for="payment-options">Payment options</label><br>
+                            <select id="payment-options" name="payment-option-selection">
+                                <option>Credit Card</option>
+                                <option>PayPal</option>
+                                <option>Cash (on arrival)</option>
+                            </select>
+                        </p>
+
+                        <p>
+                            Gender
+                            <div>
+                                <input type="radio" id="gender-male" name="gender-radio" required="required">
+                                <label for="gender-male">Male</label>
+                            </div>
+
+                            <div>
+                                <input type="radio" id="gender-female" name="gender-radio" required="required">
+                                <label for="gender-female">Female</label>
+                            </div>
+
+                            <div>
+                                <input type="radio" id="gender-non-binary" name="gender-radio" required="required">
+                                <label for="gender-non-binary">Non-binary</label>
+                            </div>
+
+                            <div>
+                                <input type="radio" id="gender-undisclosed" name="gender-radio" required="required" checked="checked">
+                                <label for="gender-undisclosed">Undisclosed</label>
+                            </div>
+                        </p>
+                    </form>
+
+                    <button type="submit" name="place-order-button" id="place-order-button"><img height="20" src="https://cdn1.iconfinder.com/data/icons/logistics-transportation-vehicles/202/logistic-shipping-vehicles-002-512.png"> Place my order!</button>
+                </section>
+            </section>
+
+
+        </main>
+
+        <hr />
+        <footer>© 2019 Hypothetical Burgers Inc.</footer>
+        
+
+
     </body>
+
 </html>

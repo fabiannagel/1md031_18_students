@@ -1,0 +1,66 @@
+@import 'https://fonts.googleapis.com/css?family=Pacifico|Dosis';
+                        
+body { 
+    font-family: arial;
+}
+
+#header-image {
+    /* Take up full width and 230px of height. crop to keep aspect ratio. */
+    height: 230px;
+    width: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+}
+
+section, header {
+    margin: 0 1em 0 1em;
+}
+
+.classname {
+    color: #ff5500;
+}
+
+#highlighted {
+    text-transform: uppercase;
+}
+
+section {
+    padding-left: 2em;
+    padding-bottom: 2em;
+}
+
+section > h2 {
+    margin-top: 2em;
+}
+
+#burger-selection {
+    background-color: black;
+    color: white;
+    border: 2px dashed white;
+}
+
+#burger-selection-table {
+    width: 90%;
+    /* center table */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#place-order-button {
+    margin-top: 2em;
+}
+
+#place-order-button:hover {
+    color: white;
+    background: grey;
+    cursor: pointer;
+}
+
+
+
+#customer-information {
+    color: black;
+    background: white;;
+    border: 2px dashed black;
+}
+
