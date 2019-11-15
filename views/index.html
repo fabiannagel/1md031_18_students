@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Welcome to Hypothetical Burgers!</title>
-        <meta charset="utf-8"/>
 
-        <link rel="stylesheet" type="text/css" href="./css/style.css">
-    </head>
-    
-    <body>
-        <header>
-            <img id="header-image" src="https://www.umamiburger.com/wp-content/uploads/2015/02/umami-burger-location-broadway-new-2.jpg" />
+<head>
+    <title>Welcome to Hypothetical Burgers!</title>
+    <meta charset="utf-8" />
+
+    <script type="text/javascript" src="js/menu.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
+    <script type="text/javascript" src="js/js_script.js" defer></script>
+    <script type="text/javascript" src="js/vue_script.js" defer></script>
+
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" href="css/deli-very.css">
+
+
+
+</head>
+
+<body>
+    <div id="app">
+
+        <header id="app">
+            <img id="header-image"
+                src="https://www.umamiburger.com/wp-content/uploads/2015/02/umami-burger-location-broadway-new-2.jpg" />
             <h1>Welcome to BurgerHeaven Online</h1>
-
         </header>
 
         <main>
@@ -22,44 +34,19 @@
                 </div>
 
                 <div class="wrapper">
-                    <div class="box burger-1">
-                        <h2>The Fire Burger</h2>
-                        <img title="Fire Burger" src="https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX4409422.jpg" height="200" />
+
+                    <div v-for="(menuItem, index) in burgerMenuItems" class="box" :class="[`burger-${index+1}`]">
+                        <h2>{{ menuItem.name }}</h2>
+                        <img :title=menuItem.name :src=menuItem.img height="200" />
 
                         <ul>
-                            <li>Kobe beef of the highest quality</li>
-                            <li>Covered in fancy cheese <span id="highlighted">(contains lactose)</span></li>
-                            <li>Cold-leavened sourdough bread <span id="highlighted">(contains gluten)</span></li>
+                            <li>{{ menuItem.kCal }} kCal</li>
+                            <li v-if="menuItem.lactose">Contains <span id="highlighted">lactose</span></li>
+                            <li v-if="menuItem.gluten">Contains <span id="highlighted">gluten</span></li>
                         </ul>
 
+                        <input type="checkbox" :name=menuItem.id value="Select this burger">Select this burger
                     </div>
-
-                    <div class="box burger-2">
-                        <h2>Fried Turkey Burger</h2>
-                        <img title="Fried Turkey Burger" src="https://www.hot-dinners.com/images/stories/blog/2016/macwildxmas.jpg" />
-                        
-                        <ul>
-                            <li>Deep fried Turkish turkey</li>
-                            <li>A slice of pink stuff <span id="highlighted">(contains lactose)</span></li>
-                            <li>Shake-n-bake <span id="highlighted">gluten-free bread</span></li>
-                        </ul>
-                    </div>
-
-                    <div class="box burger-3">
-                        <h2>A Double w/ Cheese</h2>
-                        <img title="Double w/ Cheese" src="https://www.foodrepublic.com/wp-content/uploads/2012/03/033_FR11785.jpg" />
-
-                        <ul>
-                            <li>Two layers of <span id="highlighted">pure meat</span></li>
-                            <li>Lots of yummy cheese <span id="highlighted">(contains lactose)</span></li>
-                            <li>Sweet bread bun <span id="highlighted">(contains gluten)</span></li>
-                        </ul>
-                    </div>
-
-                </div>
-                
-                
-               
             </section>
 
             <section id="customer-information">
@@ -68,25 +55,28 @@
 
                 <section id="delivery-information">
                     <h3>Delivery information</h3>
+
                     <form>
                         <p>
                             <label for="full-name">Full name</label><br>
-                            <input type="text" id="full-name" name="full-name-input" required="required" placeholder="First and last name">
+                            <input type="text" id="full-name" name="full-name-input" required="required"
+                                placeholder="First and last name">
                         </p>
+
+                        <p>Please indicate point of delivery:</p>
+                        <div class="map">
+                            <div id="dots" v-on:click="displayOrder">
+
+                                <div v-if="Object.keys(deliveryLocation).length > 0" v-bind:style="{ left: deliveryLocation.x + 'px', top: deliveryLocation.y + 'px'}">
+                                    T
+                                </div>
+                            </div>
+                        </div>
 
                         <p>
                             <label for="email">E-mail</label><br>
-                            <input type="email" id="email" name="email-input" required="required" placeholder="E-mail address">
-                        </p>
-
-                        <p>
-                            <label for="street">Street</label><br>
-                            <input type="text" id="street" name="street-input" required="required" placeholder="Street name">
-                        </p>
-
-                        <p>
-                            <label for="house">House</label><br>
-                            <input type="text" id="house" name="house-input" required="required" placeholder="House number">
+                            <input type="email" id="email" name="email-input" required="required"
+                                placeholder="E-mail address">
                         </p>
 
                         <p>
@@ -116,14 +106,35 @@
                             </div>
 
                             <div>
-                                <input type="radio" id="gender-undisclosed" name="gender-radio" required="required" checked="checked">
+                                <input type="radio" id="gender-undisclosed" name="gender-radio" required="required"
+                                    checked="checked">
                                 <label for="gender-undisclosed">Undisclosed</label>
                             </div>
                         </p>
                     </form>
 
-                    <button type="submit" name="place-order-button" id="place-order-button"><img height="20" src="https://cdn1.iconfinder.com/data/icons/logistics-transportation-vehicles/202/logistic-shipping-vehicles-002-512.png"> Place my order!</button>
+                    <button type="submit" name="place-order-button" id="place-order-button"
+                        v-on:click="placeOrder()"><img height="20"
+                            src="https://cdn1.iconfinder.com/data/icons/logistics-transportation-vehicles/202/logistic-shipping-vehicles-002-512.png">
+                        Place my order!</button>
                 </section>
+            </section>
+
+            <section id="delivery-confirmation" v-if="orderPlaced"> 
+                <h2>Delivery Confirmation</h2>
+
+                <h3>Customer details</h3>
+                <div>Name: {{ deliveryInfo.fullName }}</div>
+                <div>Email: {{ deliveryInfo.email }}</div>
+                <div>Gender: {{ deliveryInfo.gender }} </div> <br />
+
+                <div>Deliver to: {{ deliveryLocation.x }}, {{ deliveryLocation.y }}</div>
+                <div>Payment method: {{ deliveryInfo.paymentMethod }}</div>
+
+                <h3>Order summary</h3>
+                <ul v-for="(order, key) in orderDetails">
+                    <li>{{ order.name }}</li>
+                </ul>
             </section>
 
 
@@ -131,9 +142,7 @@
 
         <hr />
         <footer>© 2019 Hypothetical Burgers Inc.</footer>
-        
-
-
-    </body>
+    </div>
+</body>
 
 </html>

@@ -4,10 +4,11 @@
 'use strict';
 var socket = io();
 
+
 var vm = new Vue({
   el: '#dots',
   data: {
-    orders: {},
+    orders: {}
   },
   created: function () {
     socket.on('initialize', function (data) {
@@ -36,3 +37,4 @@ var vm = new Vue({
     }
   }
 });
+
