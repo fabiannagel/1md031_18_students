@@ -1,3 +1,6 @@
+'use strict';
+var socket = io();
+
 let vm = new Vue({
   el: "#app",
   data: {
@@ -5,14 +8,45 @@ let vm = new Vue({
     orderPlaced: false,
     orderDetails: {},
     deliveryLocation: {},
-    deliveryInfo: {}
+    deliveryInfo: {},
+  
+    orderCount: 0
   },
+
+  created: function () {
+    socket.on('initialize', function(data) {
+      this.orders = data.orderDetails;
+    }.bind(this));
+
+    socket.on('currentQueue', function(data) {
+      this.orders = data.orderDetails;
+    }.bind(this));
+  },
+
   methods: {
+    getNext: function() {
+      var lastOrder = Object.keys(this.orderDetails).reduce(function(last, next) {
+        return Math.max(last, next);
+      }, 0);
+      return lastOrder + 1;
+    },
+
     placeOrder: function() {
       this.orderPlaced = true;
-      this.orderDetails = getOrderedBurgers();
+      this.orderDetails = getOrderedBurgers(this.burgerMenuItems);
       this.deliveryInfo = getDeliveryInfo();
 
+      this.orderCount += 1;
+      
+      socket.emit("addOrder", { 
+        orderId: this.orderCount,
+        details: { 
+          x: this.deliveryLocation.x, 
+          y: this.deliveryLocation.y
+        },
+        orderItems: this.orderDetails.map(orderedItem => orderedItem.name),
+        customerInformation: this.deliveryInfo
+      });
 
     },
 
@@ -30,10 +64,11 @@ let vm = new Vue({
   }
 });
 
-function getOrderedBurgers() {
+function getOrderedBurgers(burgerMenuItems) {
   let orderedBurgers = [];
 
-  for (menuItem of menuItems) {
+  for (let i = 0; i < burgerMenuItems.length; i++) {
+    let menuItem = burgerMenuItems[i];
     let control = document.querySelector("input[name=" + menuItem.id + "]");
     
     if (control.checked) {

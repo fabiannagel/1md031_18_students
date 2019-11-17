@@ -5,16 +5,15 @@
     <title>Welcome to Hypothetical Burgers!</title>
     <meta charset="utf-8" />
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js" defer></script>
     <script type="text/javascript" src="js/menu.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
     <script type="text/javascript" src="js/js_script.js" defer></script>
     <script type="text/javascript" src="js/vue_script.js" defer></script>
 
+
     <link rel="stylesheet" type="text/css" href="./css/style.css">
     <link rel="stylesheet" href="css/deli-very.css">
-
-
-
 </head>
 
 <body>
@@ -132,7 +131,7 @@
                 <div>Payment method: {{ deliveryInfo.paymentMethod }}</div>
 
                 <h3>Order summary</h3>
-                <ul v-for="(order, key) in orderDetails">
+                <ul v-for="order in orderDetails">
                     <li>{{ order.name }}</li>
                 </ul>
             </section>
